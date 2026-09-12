@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SA28XZelkova • Ethereal Altar (Ungu • Pink • Putih)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cinzel+Decorative:wght@700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dark-fantasy">
+  <!-- Ethereal Ember Canvas -->
+  <canvas id="ember-canvas" class="ember-canvas"></canvas>
+
+  <!-- Ambient Mystical Aura Background -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Main App Wrapper -->
+  <div class="app-container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand" onclick="navigateTo('landing')">
+        <div class="brand-avatar-box">
+          <img src="https://cdn.discordapp.com/embed/avatars/0.png" id="bot-avatar" alt="Bot Avatar" class="brand-avatar">
+          <div class="status-indicator online" id="bot-status-dot"></div>
+          <div class="brand-rune-ring"></div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SA28XZelkova</span>
+          <span class="brand-badge">UNGU • PINK • PUTIH EDITION</span>
+        </div>
+      </div>
+
+      <div class="nav-metrics" id="nav-metrics">
+        <div class="metric-chip">
+          <i class="fa-solid fa-bolt-lightning text-gold"></i>
+          <span id="metric-ping">-- ms</span>
+        </div>
+        <div class="metric-chip">
+          <i class="fa-solid fa-dungeon text-purple"></i>
+          <span id="metric-guilds">-- Realm</span>
+        </div>
+      </div>
+
+      <!-- Action Navigation (Donation & User) -->
+      <div class="nav-actions">
+        <!-- Sociabuzz Tribe Donation Button -->
+        <a href="https://sociabuzz.com/sa28/tribe" target="_blank" rel="noopener noreferrer" class="btn btn-tribe" id="nav-btn-tribe" title="Donasi & Dukungan untuk Bot via Sociabuzz Tribe">
+          <i class="fa-solid fa-crown text-gold"></i>
+          <span>Dukung Kami (Tribe)</span>
+        </a>
+
+        <div class="nav-user" id="nav-user-area">
+          <button class="btn btn-discord" id="btn-login" onclick="loginWithDiscord()">
+            <i class="fa-brands fa-discord"></i>
+            <span>Login Discord</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Sections -->
+    <main class="main-content">
+
+      <!-- SECTION 1: Landing & Bot Overview -->
+      <section id="view-landing" class="view-section active">
+        <div class="hero-card glassmorphism-fantasy">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <i class="fa-solid fa-wand-magic-sparkles text-gold"></i> High-Fidelity Arcane Audio & Multi-Source Engine
+            </div>
+            <h1 class="hero-title">
+              Panggil Melodi Mistis ke Server Anda Melalui <span class="gradient-text-fantasy">Dark Fantasy Altar</span>
+            </h1>
+            <p class="hero-subtitle">
+              Rasakan dentuman audio definisi tinggi dari YouTube, Spotify, dan SoundCloud dengan latensi minimal. Dilengkapi fitur <strong>Autoplay Sinkron</strong>, anti-blokir hosting, dan panel kendali modular.
+            </p>
+            <div class="hero-actions">
+              <a href="#" id="hero-invite-btn" target="_blank" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-plus-circle"></i> Panggil Bot ke Server
+              </a>
+              <button class="btn btn-glass btn-lg" onclick="navigateTo('servers')">
+                <i class="fa-solid fa-dungeon"></i> Masuk Altar Server
+              </button>
+              <a href="https://sociabuzz.com/sa28/tribe" target="_blank" rel="noopener noreferrer" class="btn btn-tribe btn-lg" id="hero-btn-tribe">
+                <i class="fa-solid fa-crown text-gold"></i> Donasi / Tribe SA28
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="vinyl-mockup">
+              <div class="vinyl-disc" id="landing-disc">
+                <div class="vinyl-center">
+                  <i class="fa-solid fa-dragon fantasy-icon-center"></i>
+                </div>
+              </div>
+              <div class="player-floating-card glassmorphism-fantasy">
+                <div class="floating-icon"><i class="fa-solid fa-music text-gold"></i></div>
+                <div>
+                  <div class="floating-title">Arcane Audio Master</div>
+                  <div class="floating-desc">Multi-Engine & Autoplay Active</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card glassmorphism-fantasy">
+            <div class="stat-icon gold"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="stat-info">
+              <div class="stat-value">5 Engines</div>
+              <div class="stat-label">SoundCloud, Spotify, YT, Yt-Dlp</div>
+            </div>
+          </div>
+          <div class="stat-card glassmorphism-fantasy">
+            <div class="stat-icon purple"><i class="fa-solid fa-bolt-lightning"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stats-ping">-- ms</div>
+              <div class="stat-label">WebSocket Latency</div>
+            </div>
+          </div>
+          <div class="stat-card glassmorphism-fantasy">
+            <div class="stat-icon crimson"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="stat-info">
+              <div class="stat-value">Autoplay</div>
+              <div class="stat-label">Rekomendasi Sinkron</div>
+            </div>
+          </div>
+          <div class="stat-card glassmorphism-fantasy">
+            <div class="stat-icon emerald"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stats-uptime">Online</div>
+              <div class="stat-label">Uptime Grimoire</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: Dedicated Sociabuzz Tribe Support & Donation Section -->
+        <div class="donation-section glassmorphism-fantasy">
+          <div class="donation-header">
+            <div class="donation-badge"><i class="fa-solid fa-crown text-gold"></i> SANCTUARY OF PATRONS</div>
+            <h2 class="donation-title">Dukung Perjalanan & Operasional Bot di <span class="gradient-text-gold">Sociabuzz Tribe</span></h2>
+            <p class="donation-desc">
+              Bot musik ini dikembangkan dan dijalankan 24/7 menggunakan server cloud berkecepatan tinggi. Setiap donasi dan dukungan dari Anda melalui <strong>Sociabuzz Tribe SA28</strong> sangat berharga untuk membiayai server VPS, pembaruan bypass proteksi YouTube, dan penambahan fitur mutakhir lainnya!
+            </p>
+          </div>
+
+          <div class="donation-perks-grid">
+            <div class="perk-card">
+              <div class="perk-icon"><i class="fa-solid fa-server text-gold"></i></div>
+              <h4>Server VPS 24/7 Online</h4>
+              <p>Membantu biaya sewa server hosting latensi rendah agar pemutaran musik tetap stabil dan jernih tanpa henti.</p>
+            </div>
+            <div class="perk-card">
+              <div class="perk-icon"><i class="fa-solid fa-shield-heart text-crimson"></i></div>
+              <h4>Update Engine Berkala</h4>
+              <p>Dukungan untuk memperbarui extractor audio, rotasi cookies YouTube, dan optimasi pemutaran Spotify & SoundCloud.</p>
+            </div>
+            <div class="perk-card">
+              <div class="perk-icon"><i class="fa-solid fa-gem text-purple"></i></div>
+              <h4>Apresiasi Pengembang</h4>
+              <p>Dukungan langsung kepada SA28 sebagai pengembang karya bot dan web dashboard interaktif ini.</p>
+            </div>
+          </div>
+
+          <div class="donation-cta-wrap">
+            <a href="https://sociabuzz.com/sa28/tribe" target="_blank" rel="noopener noreferrer" class="btn btn-tribe btn-xl" id="btn-donate-tribe-main">
+              <i class="fa-solid fa-heart-pulse text-crimson"></i>
+              <span>Beri Dukungan di Sociabuzz Tribe (https://sociabuzz.com/sa28/tribe)</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Feature Spotlight Grid -->
+        <div class="features-grid">
+          <div class="feature-box glassmorphism-fantasy">
+            <div class="feature-icon"><i class="fa-solid fa-sliders text-gold"></i></div>
+            <h3>Web Altar Controller</h3>
+            <p>Atur pemutaran lagu langsung dari browser. Play, pause, lewati lagu, atur volume, aktifkan autoplay, dan kelola antrean secara realtime.</p>
+          </div>
+          <div class="feature-box glassmorphism-fantasy">
+            <div class="feature-icon"><i class="fa-solid fa-compact-disc text-purple"></i></div>
+            <h3>Dukungan Penuh Playlist</h3>
+            <p>Masukkan link playlist YouTube, album Spotify, atau set SoundCloud. Seluruh lagu langsung diantrekan secara terstruktur dan transparan.</p>
+          </div>
+          <div class="feature-box glassmorphism-fantasy">
+            <div class="feature-icon"><i class="fa-solid fa-feather-pointed text-crimson"></i></div>
+            <h3>Autoplay Melodi Sinkron</h3>
+            <p>Antrean habis? Bot secara cerdas mencari lagu rekomendasi dari artis dan genre yang sama dengan lagu permintaan Anda agar musik terus mengalun.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Server Selector -->
+      <section id="view-servers" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Pilih Realm / Server Discord</h2>
+            <p class="section-desc">Pilih server tempat Anda bertugas sebagai Administrator untuk mengelola pemutaran audio dan segel modul.</p>
+          </div>
+          <button class="btn btn-glass" onclick="loadUserGuilds()">
+            <i class="fa-solid fa-arrows-rotate"></i> Refresh Server
+          </button>
+        </div>
+
+        <div class="servers-grid" id="servers-list">
+          <!-- Populated by JS -->
+          <div class="loading-state">
+            <i class="fa-solid fa-spinner fa-spin fa-2x text-gold"></i>
+            <p>Menghubungi portal server Discord Anda...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Guild Dashboard & Live Controller -->
+      <section id="view-dashboard" class="view-section">
+        <div class="dashboard-topbar">
+          <button class="btn btn-glass" onclick="navigateTo('servers')">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Realm
+          </button>
+          <div class="current-guild-info" id="current-guild-badge">
+            <img src="https://cdn.discordapp.com/embed/avatars/0.png" id="guild-icon" class="guild-badge-icon" alt="Guild">
+            <div>
+              <div class="guild-badge-name" id="guild-title">Memuat Realm...</div>
+              <div class="guild-badge-sub" id="guild-voice-status">Tidak terhubung ke Voice</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Dashboard Split: Left (Music Player) & Right (Modules & Settings) -->
+        <div class="dashboard-grid">
+          
+          <!-- LEFT COLUMN: Realtime Music Player -->
+          <div class="player-column">
+            
+            <!-- Live Player Card -->
+            <div class="player-card glassmorphism-fantasy">
+              <div class="player-card-header">
+                <span class="live-tag"><span class="pulse-dot"></span> LIVE RUNIC STREAM</span>
+                <div class="header-status-group">
+                  <span class="autoplay-indicator" id="autoplay-mode-badge" onclick="sendMusicControl('autoplay')" title="Klik untuk Toggle Autoplay"><i class="fa-solid fa-wand-magic-sparkles"></i> Autoplay: Off</span>
+                  <span class="loop-indicator" id="loop-mode-badge" onclick="sendMusicControl('loop')" title="Klik untuk Toggle Loop"><i class="fa-solid fa-repeat"></i> Loop: Off</span>
+                </div>
+              </div>
+
+              <!-- Track Artwork & Info -->
+              <div class="track-hero">
+                <div class="artwork-container">
+                  <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" id="player-thumb" class="artwork-img" alt="Artwork">
+                  <div class="artwork-vinyl-ring"></div>
+                </div>
+                <div class="track-details">
+                  <h3 class="track-title" id="player-title">Tidak ada melodi yang diputar</h3>
+                  <p class="track-artist" id="player-uploader">Mulai lagu via kolom di bawah atau gunakan /play di Discord</p>
+                  <div class="track-meta" id="player-meta">
+                    <span class="meta-tag"><i class="fa-solid fa-user text-gold"></i> <span id="player-requester">-</span></span>
+                    <span class="meta-tag"><i class="fa-solid fa-clock text-purple"></i> <span id="player-duration">00:00</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="progress-container">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" id="player-progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-times">
+                  <span id="player-current-time">00:00</span>
+                  <span id="player-total-time">00:00</span>
+                </div>
+              </div>
+
+              <!-- Control Buttons -->
+              <div class="playback-controls">
+                <button class="btn-ctrl" id="btn-loop" onclick="sendMusicControl('loop')" title="Mode Pengulangan (Loop)">
+                  <i class="fa-solid fa-repeat"></i>
+                </button>
+                <button class="btn-ctrl" id="btn-autoplay" onclick="sendMusicControl('autoplay')" title="Toggle Autoplay Lagu Sinkron">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+                <button class="btn-ctrl" onclick="sendMusicControl('stop')" title="Hentikan & Bersihkan Antrean">
+                  <i class="fa-solid fa-stop"></i>
+                </button>
+                <button class="btn-ctrl btn-play-main" id="btn-play-pause" onclick="togglePlayPause()" title="Putar / Jeda">
+                  <i class="fa-solid fa-play" id="icon-play-pause"></i>
+                </button>
+                <button class="btn-ctrl" onclick="sendMusicControl('skip')" title="Lewati Lagu (Skip)">
+                  <i class="fa-solid fa-forward-step"></i>
+                </button>
+                <div class="volume-dropdown">
+                  <button class="btn-ctrl" id="btn-volume" title="Volume Suara">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </button>
+                  <div class="volume-slider-popup">
+                    <span id="vol-display">70%</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="70" oninput="changeVolume(this.value)">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Play Input -->
+              <div class="quick-play-box">
+                <div class="input-with-icon">
+                  <i class="fa-solid fa-magnifying-glass text-gold"></i>
+                  <input type="text" id="quick-play-input" placeholder="Ketik judul lagu, link YouTube, Spotify (track/playlist), atau SoundCloud...">
+                </div>
+                <button class="btn btn-primary" onclick="quickPlaySong()">
+                  <i class="fa-solid fa-wand-sparkles"></i> Putar Lagu
+                </button>
+              </div>
+            </div>
+
+            <!-- Queue Card -->
+            <div class="queue-card glassmorphism-fantasy">
+              <div class="queue-header">
+                <h3><i class="fa-solid fa-scroll text-gold"></i> Antrean Melodi Realm</h3>
+                <span class="badge badge-gold" id="queue-count">0 Lagu</span>
+              </div>
+              <div class="queue-list" id="queue-items-container">
+                <div class="empty-queue">
+                  <i class="fa-solid fa-compact-disc fa-2x text-muted"></i>
+                  <p>Antrean masih sepi. Masukkan lagu atau playlist sekarang!</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Modular Plugins & Guild Settings -->
+          <div class="settings-column">
+            
+            <!-- Module Manager Box -->
+            <div class="card glassmorphism-fantasy">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title"><i class="fa-solid fa-book-skull text-gold"></i> Segel Modul Realm</h3>
+                  <p class="card-desc">Aktifkan atau matikan mantra modul server secara independen.</p>
+                </div>
+              </div>
+              <div class="modules-list" id="modules-container">
+                <!-- Populated by JS -->
+                <div class="loading-state"><i class="fa-solid fa-spinner fa-spin text-gold"></i> Memuat segel modul...</div>
+              </div>
+            </div>
+
+            <!-- Guild Settings Configuration Box -->
+            <div class="card glassmorphism-fantasy">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fa-solid fa-gears text-gold"></i> Konfigurasi Realm</h3>
+                <p class="card-desc">Sesuaikan batas volume dan gerbang sambutan bot.</p>
+              </div>
+              
+              <form id="guild-settings-form" onsubmit="saveGuildSettings(event)">
+                <div class="form-group">
+                  <label for="setting-default-vol">Default Volume Musik (%)</label>
+                  <div class="range-display-wrap">
+                    <input type="range" id="setting-default-vol" min="10" max="100" value="70" oninput="document.getElementById('vol-setting-val').textContent = this.value + '%'">
+                    <span id="vol-setting-val" class="badge badge-gold">70%</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="setting-welcome-channel">Channel Sambutan (Welcomer)</label>
+                  <select id="setting-welcome-channel" class="form-select">
+                    <option value="">-- Pilih Channel Text --</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="setting-welcome-msg">Pesan Sambutan Kustom</label>
+                  <textarea id="setting-welcome-msg" class="form-textarea" rows="2" placeholder="Gunakan {user} dan {server}"></textarea>
+                  <small class="form-tip">Placeholder: <code>{user}</code> = sebut member, <code>{server}</code> = nama server</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                  <i class="fa-solid fa-floppy-disk"></i> Simpan Konfigurasi Realm
+                </button>
+              </form>
+            </div>
+
+            <!-- Sidebar Patron / Tribe Support Widget -->
+            <div class="card glassmorphism-fantasy patron-sidebar-widget">
+              <div class="patron-badge"><i class="fa-solid fa-crown text-gold"></i> DUKUNG PENGEMBANG</div>
+              <h4>Sociabuzz Tribe SA28</h4>
+              <p>Bantu operasional hosting 24/7 dan pemeliharaan audio bot agar terus aktif melayani server Anda.</p>
+              <a href="https://sociabuzz.com/sa28/tribe" target="_blank" rel="noopener noreferrer" class="btn btn-tribe btn-block">
+                <i class="fa-solid fa-heart-pulse text-crimson"></i> Donasi Sekarang
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Global Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Chibi Floating Mascot & Popup Assistant (Reze-chan) -->
+    <div id="chibi-widget" class="chibi-widget">
+      <!-- Floating Speech Bubble -->
+      <div id="chibi-bubble" class="chibi-bubble" onclick="toggleChibiCard()">
+        <span id="chibi-speech-text">Hai! Aku asisten musikmu di sini~ Klik aku untuk ngobrol atau kontrol lagu! 💜✨</span>
+        <div class="bubble-arrow"></div>
+      </div>
+
+      <!-- Chibi Avatar & Aura -->
+      <div class="chibi-character-wrap" onclick="onChibiClick()" title="Klik untuk berinteraksi dengan Chibi!">
+        <div class="chibi-sparkle-heart">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="chibi-aura-ring"></div>
+        <img src="/assets/chibi-clean.png" alt="Chibi Mascot" class="chibi-img" id="chibi-img">
+        <span class="chibi-badge-status" id="chibi-music-badge">IDLE</span>
+      </div>
+
+      <!-- Chibi Expandable Popup Card -->
+      <div id="chibi-card-popup" class="chibi-card-popup">
+        <div class="chibi-card-header">
+          <div class="chibi-header-info">
+            <span class="chibi-name">Reze-chan Mascot</span>
+            <span class="chibi-role">✨ Asisten Musik Ungu • Pink • Putih</span>
+          </div>
+          <button class="chibi-btn-close" onclick="toggleChibiCard(false)" title="Tutup">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="chibi-card-body">
+          <div class="chibi-nowplaying-mini" id="chibi-mini-status">
+            <i class="fa-solid fa-compact-disc fa-spin text-purple"></i>
+            <span id="chibi-mini-title">Belum ada lagu yang diputar</span>
+          </div>
+
+          <div class="chibi-quick-controls">
+            <button class="btn-chibi-ctrl" onclick="sendMusicControl('resume')" title="Lanjutkan (Resume)">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="btn-chibi-ctrl" onclick="sendMusicControl('pause')" title="Jeda (Pause)">
+              <i class="fa-solid fa-pause"></i>
+            </button>
+            <button class="btn-chibi-ctrl" onclick="sendMusicControl('skip')" title="Lewati (Skip)">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+            <button class="btn-chibi-ctrl" onclick="sendMusicControl('autoplay')" title="Toggle Autoplay">
+              <i class="fa-solid fa-wand-magic-sparkles text-gold"></i>
+            </button>
+          </div>
+
+          <div class="chibi-command-tip">
+            <div class="chibi-tip-title"><i class="fa-solid fa-terminal text-emerald"></i> Prefix Baru: <code>z!</code></div>
+            <div class="chibi-tip-list">
+              <span><code>z!p &lt;lagu&gt;</code> Putar lagu / playlist</span>
+              <span><code>z!s</code> Lewati lagu (Skip)</span>
+              <span><code>z!q</code> Lihat daftar antrean</span>
+              <span><code>z!vol &lt;0-100&gt;</code> Atur volume</span>
+            </div>
+          </div>
+
+          <div class="chibi-interactive-quote" id="chibi-quote-area">
+            "Mau dengar lagu apa hari ini? Masukkan link YouTube, Spotify, atau SoundCloud ya! 💜"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-brand">
+        <span class="footer-title">SA28XZelkova</span> • Ethereal Music Engine • Ungu Pink Putih Edition (Prefix: <code>z!</code>)
+      </div>
+      <div class="footer-links">
+        <a href="https://sociabuzz.com/sa28/tribe" target="_blank" rel="noopener noreferrer" class="footer-tribe-link">
+          <i class="fa-solid fa-crown text-gold"></i> Sociabuzz Tribe
+        </a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-discord"></i> Discord Realm
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github"></i> Repository
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Socket.io & App Scripts -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
